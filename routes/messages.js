@@ -6,14 +6,14 @@ const { messages, joiners } = require("../models");
 exports = module.exports = function (io) {
     io.on("connection", async (socket) => {
 
-        const userMessages = await messages.findAll();
-
-        socket.emit("receive_message", userMessages);
+        socket.on('receive_user_id', async (data) => {
+            const userMessages = await messages.findAll({ where: { receiver_id: data.receiver_id } });
+            socket.emit("receive_message", userMessages);
+        })
 
         socket.on("send_message", (data) => {
-            messages.create(data).then(async () => { 
-
-                const userMessages = await messages.findAll();
+            messages.create(data).then(async () => {
+                const userMessages = await messages.findAll({ where: { receiver_id: data.receiver_id } });
 
                 socket.broadcast.emit("receive_message", userMessages);
                 socket.emit("receive_message", userMessages);
