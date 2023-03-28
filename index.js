@@ -19,7 +19,6 @@ const io = new Server(server, {
 // routes 
 const messages = require("./routes/messages")(io);
 const joiners = require("./routes/joiners");
-const random = require("./routes/random")(io);
 
 app.use(cors());
 app.use(express.json());
