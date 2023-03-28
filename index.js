@@ -3,21 +3,43 @@ const app = express();
 const cors = require("cors");
 const db = require("./models");
 require("dotenv").config();
-const PORT = process.env.PORT || 3005;
-// routes 
-const messages = require("./routes/messages");
+const { Server } = require("socket.io");
+const http = require("http");
 
-db.sequelize.sync().then(() => {
-    app.listen(PORT, () => {
-        console.log("server started...")
-    })
-})
+const PORT = process.env.PORT || 3005;
+
+const server = http.createServer(app);
+
+const io = new Server(server, {
+    cors: {
+        origin: PORT
+    }
+});  
+
+// routes 
+const messages = require("./routes/messages")(io);
+const joiners = require("./routes/joiners");
+const random = require("./routes/random")(io);
 
 app.use(cors());
 app.use(express.json());
 // routes
-app.use("/messages", messages);
+// app.use("/messages", messages);
+app.use("/join", joiners);
+
+
+db.sequelize.sync().then(() => {
+    server.listen(PORT, () => {
+        console.log("server started...")
+    })
+})
 
 app.get("/", (req, res) => {
     res.send("hello world");
-})
+}) 
+
+// io.on('connection', (socket) => {
+//     socket.on("send_message", (data) => {
+//         socket.broadcast.emit("receive_message", data);
+//     })
+// }) 
