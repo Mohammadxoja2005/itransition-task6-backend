@@ -9,13 +9,14 @@ router.post("/", async (req, res) => {
     const findedName = await joiners.findOne({ where: { name: name } });
 
     if (findedName == null) {
-        res.json(null)
+        const joinerId = await joiners.create({ name: name })
+        res.json(joinerId.id)
     } else {
         res.json(findedName.id);
     }
 })
 
-router.get('/', async (req,res) => { 
+router.get('/', async (req, res) => {
     const showAllNames = await joiners.findAll();
 
     res.json(showAllNames);

@@ -36,9 +36,3 @@ db.sequelize.sync().then(() => {
 app.get("/", (req, res) => {
     res.send("hello world");
 }) 
-
-// io.on('connection', (socket) => {
-//     socket.on("send_message", (data) => {
-//         socket.broadcast.emit("receive_message", data);
-//     })
-// }) 
