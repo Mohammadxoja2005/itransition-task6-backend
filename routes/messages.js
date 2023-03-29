@@ -14,9 +14,14 @@ exports = module.exports = function (io) {
         socket.on("send_message", (data) => {
             messages.create(data).then(async () => {
                 const userMessages = await messages.findAll({ where: { receiver_id: data.receiver_id } });
+                
+                socket.broadcast.emit("receive_message", userMessages);  
 
-                socket.broadcast.emit("receive_message", userMessages);
-                socket.emit("receive_message", userMessages);
+                if(data.receiver_id == data.sender_id) {
+                    socket.emit("receive_message", userMessages);
+
+                } 
+                
             });
 
         })
