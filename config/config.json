@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "epiz_33899265",
-    "password": "dcOLAHulZ9",
-    "database": "epiz_33899265_task6",
-    "host": "sql300.epizy.com",
+    "username": "freedb_muhammadxoja",
+    "password": "mu@yJzH8rRYA&2D",
+    "database": "freedb_coursework",
+    "host": "sql.freedb.tech",
     "dialect": "mysql"
   },
   "test": {
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "epiz_33899265",
-    "password": "dcOLAHulZ9",
-    "database": "epiz_33899265_task6",
-    "host": "sql300.epizy.com",
+    "username": "freedb_muhammadxoja",
+    "password": "mu@yJzH8rRYA&2D",
+    "database": "freedb_coursework",
+    "host": "sql.freedb.tech",
     "dialect": "mysql"
   }
 }
