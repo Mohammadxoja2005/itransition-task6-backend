@@ -12,9 +12,9 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "https://itransition-task6-backend-production.up.railway.app"
+        origin: 3001
     }
-});  
+});
 
 // routes 
 const messages = require("./routes/messages")(io);
