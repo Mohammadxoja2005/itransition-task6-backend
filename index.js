@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: PORT
+        origin: "https://itransition-task6-backend-production.up.railway.app"
     }
 });  
 
