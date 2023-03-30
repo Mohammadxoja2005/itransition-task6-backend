@@ -17,9 +17,8 @@ const io = new Server(server, {
 });
 
 // routes 
-const messages = require("./routes/messages")(io);
-const joiners = require("./routes/joiners");
-const joiners1 = require("./routes/joiners1")(io);
+require("./routes/messages")(io);
+require("./routes/joiners1")(io);
 
 
 app.use(cors());
