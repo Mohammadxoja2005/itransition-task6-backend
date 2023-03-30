@@ -24,9 +24,6 @@ const joiners1 = require("./routes/joiners1")(io);
 
 app.use(cors());
 app.use(express.json());
-// routes
-// app.use("/messages", messages);
-app.use("/join", joiners);
 
 
 db.sequelize.sync().then(() => {
