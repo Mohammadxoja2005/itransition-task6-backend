@@ -9,10 +9,10 @@ const http = require("http");
 const PORT = process.env.PORT || 3005;
 
 const server = http.createServer(app);
-
+// "https://itransition-task6-frontend-yauk.vercel.app/"
 const io = new Server(server, {
     cors: {
-        origin: "https://itransition-task6-frontend-yauk.vercel.app/"
+        origin: 3001
     }
 });
 
