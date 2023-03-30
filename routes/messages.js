@@ -1,5 +1,3 @@
-const express = require("express");
-const router = express.Router();
 // model 
 const { messages, joiners } = require("../models");
 
@@ -7,21 +5,22 @@ exports = module.exports = function (io) {
     io.on("connection", async (socket) => {
 
         socket.on('receive_user_id', async (data) => {
-            const userMessages = await messages.findAll({ where: { receiver_id: data.receiver_id } });
-            socket.emit("receive_message", userMessages);
+            await messages.findAll({ where: { receiver_id: data.receiver_id } })
+                .then((data) => {
+                    socket.emit("receive_message", data);
+                });
         })
 
         socket.on("send_message", (data) => {
             messages.create(data).then(async () => {
-                const userMessages = await messages.findAll({ where: { receiver_id: data.receiver_id } });
-                
-                socket.broadcast.emit("receive_message", userMessages);  
+            await messages.findAll({ where: { receiver_id: data.receiver_id } })
+                .then((userMessage) => {
+                    socket.broadcast.emit("receive_message", userMessage); 
 
-                if(data.receiver_id == data.sender_id) {
-                    socket.emit("receive_message", userMessages);
-
-                } 
-                
+                    if (userMessage.receiver_id == data.sender_id) {
+                        socket.emit("receive_message", userMessage);
+                    }
+                })
             });
 
         })
