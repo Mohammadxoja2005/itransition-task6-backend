@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: 3001
+        origin: "https://itransition-task6-frontend-yauk.vercel.app/"
     }
 });
 
